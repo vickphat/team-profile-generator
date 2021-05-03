@@ -1,6 +1,6 @@
 const employee = require("../lib/employee");
 
-describe("employee", () => {
+describe("Employee", () => {
 
     it("Obtain a name", () => {
 
