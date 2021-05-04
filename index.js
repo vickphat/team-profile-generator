@@ -1,3 +1,4 @@
+// Dependencies
 const inquirer = require("inquirer");
 const fs = require("fs");
 const engineer = require("./lib/engineer");
@@ -5,7 +6,7 @@ const intern = require("./lib/intern");
 const manager = require("./lib/manager");
 
 let teamResult = []
-
+// Initial function for prompts
 function teamName() {
     inquirer.prompt([
         {
@@ -20,6 +21,7 @@ function teamName() {
         })
 };
 
+// Function for manager prompt 
 function addManager() {
     inquirer.prompt([
         {
@@ -38,6 +40,7 @@ function addManager() {
             message: "What is the team manager's office number?"
         },
     ])
+    // Adds command line inputs
         .then(function (data) {
             const name = data.name;
             const id = 1;
@@ -49,6 +52,7 @@ function addManager() {
         })
 };
 
+// Function for engineer prompt 
 function addEngineer() {
     inquirer.prompt([
         {
@@ -67,6 +71,7 @@ function addEngineer() {
             message: "What is the engineer's GitHub profile name?"
         },
     ])
+      // Adds command line inputs
         .then(function (data) {
             const name = data.name
             const id = teamResult.length
@@ -78,6 +83,7 @@ function addEngineer() {
         });
 }
 
+// Function for intern prompt 
 function addIntern() {
     inquirer.prompt([
         {
@@ -96,6 +102,7 @@ function addIntern() {
             message: "What is the intern's email address?",
         },
     ])
+      // Adds command line inputs
         .then(function (data) {
             const name = data.name
             const id = teamResult.length 
@@ -108,6 +115,7 @@ function addIntern() {
 
 };
 
+// Function to ass user if they would like to add more team members
 function addTeamMembers() {
     inquirer.prompt([
         {
@@ -118,6 +126,7 @@ function addTeamMembers() {
 
         }
     ])
+    // Runs corresponding function according to user's choice
         .then(function (data) {
             switch (data.teamData) {
                 case "Add an engineer":
@@ -135,8 +144,10 @@ function addTeamMembers() {
         })
 }
 
+// Generates the HTML file
 function generateHTML() {
     const html = [];
+    // First section of HTML
     const htmlStart = `
 <!DOCTYPE html>
 <html lang="en">
@@ -157,6 +168,8 @@ function generateHTML() {
     `
     html.push(htmlStart);
 
+    // Main section of HTML
+    // For loop to create cards
     for (let i = 1; i < teamResult.length; i++) {
         let card = `
     <div class="card d-flex flex-row bd-highlight m-4">
@@ -189,6 +202,7 @@ function generateHTML() {
         html.push(card);
     }
 
+    // Bottom of HTML
     const htmlEnd = `
     </div>
     </div>
@@ -197,6 +211,7 @@ function generateHTML() {
 
     html.push(htmlEnd);
 
+    // Creates the index.html file in the dist folder
     fs.writeFile("./dist/index.html", html.join(""), (err) =>
     err ? console.log(err) : console.log("Success! HTML file created")
     );
