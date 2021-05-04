@@ -1,6 +1,5 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const employee = require("./lib/employee");
 const engineer = require("./lib/engineer");
 const intern = require("./lib/intern");
 const manager = require("./lib/manager");
@@ -16,8 +15,7 @@ function teamName() {
         }
     ])
         .then(function (data) {
-            const teamNameInput = data.name;
-            teamResult.push(teamNameInput);
+            teamResult.push(data.name);
             addManager();
         })
 };
@@ -71,7 +69,7 @@ function addEngineer() {
     ])
         .then(function (data) {
             const name = data.name
-            const id = teamResult.length + 1
+            const id = teamResult.length
             const email = data.email
             const github = data.github
             const teamMember = new engineer(name, id, email, github)
@@ -100,7 +98,7 @@ function addIntern() {
     ])
         .then(function (data) {
             const name = data.name
-            const id = teamResult.length + 1
+            const id = teamResult.length 
             const email = data.email
             const school = data.school
             const teamMember = new intern(name, id, email, school)
@@ -147,34 +145,36 @@ function generateHTML() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>${teamResult[0]}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <div class="banner-bar">
-        <h1>${teamResult[0]}</h1>
+    <div>
+        <h1 class="text-center bg-dark text-white">${teamResult[0]}</h1>
     </div>
-    <div class="card-container">
+    <div class="container">
+    <div class="row text-center">
     `
     html.push(htmlStart);
 
     for (let i = 1; i < teamResult.length; i++) {
         let card = `
-    <div class="member-card">
-        <div class="card-top">
-            <h2>${teamResult[i].name}</h2>
-            <h2>${teamResult[i].title}</h2>
-        </div>
-        <div class="card-bottom">
+    <div class="card d-flex flex-row bd-highlight m-4">
+        <div class="card-body">
+            <h2 class="card-title bg-dark text-white text-center" style="width: 15rem;">${teamResult[i].name}</h2>
+            <h4 class="card-subtitle mb-2 text-muted text-center">${teamResult[i].title}</h4>
             <p>Employee ID: ${teamResult[i].id}</p>
-            <p>Email: <a href="mailto:${teamResult[i].email}">${teamResult[i].email}</a>></p>
+            <p>Email: <a href="mailto:${teamResult[i].email}">${teamResult[i].email}</a></p>
+            
     `
         if (teamResult[i].officeNumber) {
             card += `
-        <p>${teamResult[i].officeNumber}</p>
+        <p>Office Number: ${teamResult[i].officeNumber}</p>
         `
         }
         if (teamResult[i].github) {
             card += `
-        <p>GitHub: <a href="https://github.com/${teamResult[i].github}">${teamResult[i].github}</a></p>
+        <p>GitHub: <a href="https://github.com/${teamResult[i].github}" target="blank">${teamResult[i].github}</a></p>
         `
         }
         if (teamResult[i].school) {
@@ -191,12 +191,13 @@ function generateHTML() {
 
     const htmlEnd = `
     </div>
+    </div>
     </body>
     </html>`
 
     html.push(htmlEnd);
 
-    fs.writeFile("index.html", html.join(""), (err) =>
+    fs.writeFile("./dist/index.html", html.join(""), (err) =>
     err ? console.log(err) : console.log("Success! HTML file created")
     );
 }
