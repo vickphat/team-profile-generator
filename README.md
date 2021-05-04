@@ -9,6 +9,7 @@
 2. [Installation](#installation)
 3. [Usage](#usage)
 4. [Questions](#questions)
+5. [Repositories](#repositories)
 
 ## Acceptance Criteria:
 
@@ -50,11 +51,22 @@ This project is intended to be used to generate an HTML file using the user's re
 ## Testing:
 Please refer to the video to see how I tested my application. 
 
-<img src = "Homework\TeamProfileGenerator\images\teamprofile.JPG">
+<img src = "https://github.com/vickphat/team-profile-generator/blob/master/images/teamprofile.JPG">
+
 https://www.youtube.com/watch?v=X6dsSpjfi7E
+
+## Demo:
+The following link is a video that will showcase how to run the application.
+
+https://www.youtube.com/watch?v=C5RLvQy7fSg
 
 ## Questions: 
 If there are any questions that you may have, please contact me by the following:
 
 * Github: https://github.com/vickphat
 * Email: vickphat@gmail.com 
+
+## Repositories
+The following link will be to my GitHub respository for this project.
+
+https://github.com/vickphat/team-profile-generator
