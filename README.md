@@ -65,8 +65,3 @@ If there are any questions that you may have, please contact me by the following
 
 * Github: https://github.com/vickphat
 * Email: vickphat@gmail.com 
-
-## Repositories
-The following link will be to my GitHub respository for this project.
-
-https://github.com/vickphat/team-profile-generator
